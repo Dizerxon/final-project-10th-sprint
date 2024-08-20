@@ -3,15 +3,12 @@
 # создаём каталог task с вложенными директориями
 
 # task
-mkdir task
 #   dir1
-mkdir task/dir1
 #   dir2
-mkdir task/dir2
 #   dir3
-mkdir task/dir3
 #       dir4
-mkdir task/dir3/dir4
+mkdir -p task/dir1 task/dir2 task/dir3/dir4
+
 
 # изменяем текущую директорию на task
 cd task
@@ -19,11 +16,10 @@ cd task
 touch task/dir2/empty
 
 # создаём файл task/dir2/hello.sh с таким содержанием:
-cd task/dir2
-nano hello.sh
 # #!/bin/bash
 # echo "$1, привет!"
-echo "$1, привет!"
+echo '#!/bin/bash
+echo $*, привет!' > dir2/hello.sh
 
 # устанавливаем для task/dir2/hello.sh права rwxrw-r--
 chmod 764 task/dir2/hello.sh
@@ -35,12 +31,12 @@ cp -r task/dir2/* task/dir3/dir4
 
 # записываем в task/dir1/summary.txt список файлов с расширением *.txt
 # находящихся в task, включая поддиректории
-find task -type f -iname "*.txt" > taskj/dir1/summary.txt
+find task -type f -iname "*.txt" > task/dir1/summary.txt
 # дописываем в task/dir1/summary.txt содержимое task/dir2/list.txt
 cat task/dir2/list.txt  >> task/dir1/summary.txt
 
 # определяем переменную окружения NAME со значением "Всем студентам"
-NAME='Всем студентам'
+export NAME='Всем студентам'
 
 # запускаем task/dir2/hello.sh с переменной окружения NAME в качестве аргумента
 # вывод скрипта должен дописаться в файл task/dir1/summary.txt
