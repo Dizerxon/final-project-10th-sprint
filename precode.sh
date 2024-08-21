@@ -30,7 +30,7 @@ cp -r task/dir2/* task/dir3/dir4
 
 # записываем в task/dir1/summary.txt список файлов с расширением *.txt
 # находящихся в task, включая поддиректории
-find . -type f -iname "*.txt"
+find . -type f -iname "*.txt" > dir1/summary.txt
 # дописываем в task/dir1/summary.txt содержимое task/dir2/list.txt
 cat task/dir2/list.txt  >> task/dir1/summary.txt
 
